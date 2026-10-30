@@ -1,0 +1,219 @@
+# Turn-rate-law coefficients of the TU Delft V3 kite, identified with V3Kite.jl.
+# Copied unchanged from RobustKiteControllers.jl (formerly SimpleKiteControllers.jl),
+# data/turn_rate_coeffs.yaml, MIT licence, (c) Uwe Fechner and contributors.
+# Law: psi_dot = c1 * v_a * u_s + c2 / v_a * sin(psi) * cos(elevation)
+conditions:
+  system: "system_reelout_maasvlakte.yaml"
+  l_tether: 150.0
+  v_wind: 9.51
+  elevation: 30.0
+  dt: 0.0111111111
+entries:
+  - c1: 0.348278060619048
+    delay: 0.08333333333333333
+    dead_time: 0.02777777777777778
+    n_runs: 2
+    date: "2026-10-25"
+    outcome: "time_limit"
+    kite_id: "867207c8156c"
+    kite_lag: 0.05555555555555555
+    v_app: 52.10664
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.0017749641325490548
+    rms_lag: 0.054367583670853876
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.2
+    rms_delay: 0.05604795431539364
+    c2_se: 0.13086814325572899
+    c2: 1.7229479323478045
+    c1_se: 0.0004970744312326983
+    dead_time_se: 0.001774964132549055
+  - body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    c1: 0.3378740911510057
+    delay: 0.09444444444444444
+    dead_time: 0.02777777777777778
+    n_runs: 2
+    date: "2026-10-25"
+    outcome: "time_limit"
+    kite_id: "867207c8156c"
+    kite_lag: 0.06666666666666667
+    v_app: 49.305225
+    depower: 0.225
+    rms_delay: 0.05489631976822363
+    n_flights: 3
+    c2_se: 0.10093713114217705
+    c2: 2.3346437278980665
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.0016339869281045754
+    rms_lag: 0.05357818673954177
+    c1_se: 0.0007364654718609039
+    dead_time_se: 0.0013864838846795048
+  - c1: 0.31377205956495025
+    delay: 0.11666666666666667
+    dead_time: 0.03888888888888889
+    n_runs: 2
+    date: "2026-10-02"
+    kite_id: "867207c8156c"
+    outcome: "time_limit"
+    kite_lag: 0.07777777777777778
+    v_app: 44.57438
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.0009527699174583827
+    rms_lag: 0.04980886765294454
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.25
+    rms_delay: 0.05084466435722033
+    c2_se: 0.06927740455269958
+    c2: 2.5365449830253106
+    c1_se: 0.0007338262711403473
+    dead_time_se: 0.001155403237232921
+  - c1: 0.2741720263305314
+    delay: 0.12777777777777777
+    dead_time: 0.05
+    n_runs: 3
+    date: "2026-10-02"
+    kite_id: "867207c8156c"
+    outcome: "time_limit"
+    kite_lag: 0.07777777777777778
+    v_app: 39.141045
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.003961241102993664
+    rms_lag: 0.04666698973482201
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.275
+    rms_delay: 0.047838198160880564
+    c2_se: 0.07421373458520344
+    c2: 3.2445378431459684
+    c1_se: 0.0007198780830021999
+    dead_time_se: 0.004177555353794851
+  - c1: 0.23255347394570536
+    delay: 0.1388888888888889
+    dead_time: 0.07222222222222223
+    n_runs: 3
+    date: "2026-10-02"
+    kite_id: "867207c8156c"
+    outcome: "time_limit"
+    kite_lag: 0.06666666666666667
+    v_app: 35.707066
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.006223544832976288
+    rms_lag: 0.03939732255129722
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.3
+    rms_delay: 0.03997614928484496
+    c2_se: 0.06471796353752012
+    c2: 3.6900921173073993
+    c1_se: 0.0004881417296001862
+    dead_time_se: 0.006203676064062254
+  - c1: 0.19481797650611574
+    delay: 0.15000000000000002
+    dead_time: 0.07222222222222223
+    n_runs: 2
+    date: "2026-10-02"
+    kite_id: "867207c8156c"
+    outcome: "time_limit"
+    kite_lag: 0.07777777777777778
+    v_app: 34.49572
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.007590568398259434
+    rms_lag: 0.033862245853298494
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.325
+    rms_delay: 0.03468016108020303
+    c2_se: 0.08331673047017593
+    c2: 3.737398010907285
+    c1_se: 0.00037042160543871913
+    dead_time_se: 0.007050800330193274
+  - c1: 0.1659908806906614
+    delay: 0.1611111111111111
+    dead_time: 0.10555555555555556
+    n_runs: 1
+    date: "2026-10-02"
+    kite_id: "867207c8156c"
+    outcome: "time_limit"
+    kite_lag: 0.05555555555555555
+    v_app: 31.018934
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.009991613614962126
+    rms_lag: 0.027785514647867264
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.35
+    rms_delay: 0.02788953515069543
+    c2_se: 0.06605724455292071
+    c2: 3.7657202130059035
+    c1_se: 0.00030105729968320265
+    dead_time_se: 0.009582823886580261
+  - c1: 0.14440831373645885
+    delay: 0.18333333333333335
+    dead_time: 0.16111111111111112
+    n_runs: 1
+    date: "2026-10-02"
+    kite_id: "867207c8156c"
+    outcome: "time_limit"
+    kite_lag: 0.022222222222222223
+    v_app: 23.937588
+    n_flights: 3
+    body_damping:
+      - 0.0
+      - 0.0
+      - 40.0
+    kite_lag_se: 0.016331798216448087
+    rms_lag: 0.024245383360083604
+    body_sim_damping:
+      - 0.0
+      - 0.0
+      - 32.0
+    depower: 0.375
+    rms_delay: 0.024263577565174853
+    c2_se: 0.13217349659400177
+    c2: 3.8686644633426583
+    c1_se: 0.003722465596061453
+    dead_time_se: 0.021432290776860766

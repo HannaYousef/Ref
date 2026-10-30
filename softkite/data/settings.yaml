@@ -1,0 +1,93 @@
+# Settings of the soft-wing reference model (TU Delft V3 LEI kite, 25 m^2 flat area).
+# Every key maps to a field of the dataclasses in softkite/settings.py; missing keys
+# fall back to the defaults there. Sources of the defaults are given per line.
+
+environment:
+  v_wind_ref: 9.51     # wind speed at reference height [m/s] (V3Kite.jl / KiteUtils default)
+  h_ref: 6.0           # reference height [m] (KiteUtils)
+  profile_exp: 0.08163 # power-law exponent of the wind profile (KiteUtils alpha)
+  profile_law: power   # "power" (KiteUtils default) or "log" (log law with roughness z0)
+  z0: 0.07             # roughness length for the log law [m] (van der Vlugt et al. 2019)
+  wind_dir: 0.0        # wind direction: the wind blows along +x of the W frame [deg]
+  rho: 1.225           # air density [kg/m^3]
+  g: 9.81              # [m/s^2]
+
+kite:
+  aero_file: v3_aero.yaml            # table in data/ (or an absolute path)
+  turn_rate_file: v3_turn_rate_coeffs.yaml
+  m_wing: 10.6         # wing mass incl. bridle [kg] (V3 reported value; V3Kite.jl uses 11.0)
+  m_kcu: 8.4           # kite control unit mass [kg] (V3Kite.jl)
+  cd_kcu_area: 0.059   # KCU drag area CD*A [m^2] (cd 0.47, diameter 0.4 m, KiteUtils)
+  cd_extra: 0.0        # additional drag coefficient, e.g. to match flight data [-]
+  u_p_powered: 0.22    # relative depower of the powered reference state
+  u_p_depowered: 0.40  # relative depower of the depowered reference state
+
+kcu:
+  v_depower: 0.075     # depower rate limit [1/s] (V3Kite.jl sim_settings)
+  v_steering: 2.0      # steering rate limit [1/s]
+  max_steering: 0.32   # steering command limit [-] (RobustKiteControllers.jl)
+  use_delay: true      # apply the identified steering dead time of the turn-rate law
+
+tether:
+  segments: 10
+  d_tether: 4.0        # [mm]
+  cd_tether: 0.958     # (Tethers.jl)
+  rho_tether: 724.0    # [kg/m^3] Dyneema (Tethers.jl)
+  c_spring: 614600.0   # E*A [N] (Tethers.jl)
+
+winch:
+  m_eff: 120.0         # drum + motor inertia expressed as a mass at the drum radius [kg]
+  tau_speed: 0.1       # time constant of the motor's speed loop [s]
+  f_motor_max: 5000.0  # motor/generator force limit at the drum [N]
+  v_ro_max: 8.0        # max reel-out speed [m/s] (KiteUtils V3)
+  v_ri_max: 8.0        # max reel-in speed [m/s]
+  a_max: 4.0           # acceleration limit of the speed set-point [m/s^2]
+
+simulation:
+  dt: 0.02             # control and logging period [s]
+  substeps: 2          # RK4 steps per control period
+  l_tether0: 200.0     # initial tether length [m]
+  elevation0: 70.0     # initial elevation [deg]
+  azimuth0: 0.0        # initial azimuth [deg]
+  heading0: 0.0        # initial heading [deg], 0 = nose up
+  depower0: 0.40       # initial depower [-]
+  sim_time: 400.0      # [s]
+
+control:
+  # course / heading loop (nonlinear inversion of the turn-rate law + PD)
+  k_psi: 2.5           # bandwidth of the heading loop [rad/s]
+  k_psi_d: 0.0         # derivative gain on the heading-rate error [-]
+  v_heading: 5.0       # below this tangential speed: heading feedback only [m/s]
+  v_course: 10.0       # above this tangential speed: course feedback only [m/s]
+  # figure-of-eight pattern (reel-out)
+  f8_azimuth: 25.0     # half width of the eight [deg]
+  f8_height: 9.0       # elevation half height [deg]
+  f8_elevation: 28.0   # elevation of the centre [deg]
+  f8_lookahead: 5.0    # look-ahead along the path [deg]
+  f8_up_turns: true    # fly upwards in the turns (downwards through the centre)
+  # depower settings
+  u_p_ro: 0.25         # depower during reel-out [-]
+  u_p_ri: 0.40         # depower during reel-in [-]
+  u_p_tr: 0.30         # depower while climbing in the retraction transition [-]
+  u_p_f8: 0.35         # depower for figures of eight at constant tether length [-]
+  # retraction transition and reel-in parking
+  ri_elevation: 70.0   # aim point of the retraction climb (azimuth 0) [deg]
+  tr_elevation: 55.0   # elevation that ends the transition and starts the reel-in [deg]
+  tr_time_max: 12.0    # maximum duration of the transition [s]
+  ro_exit_wait: 0.0    # at l_max, wait at most this long for the kite to climb before the transition [s]
+  ri_beta_max: 80.0    # reel-in: elevation at which the reel-in speed is cut to 20 % [deg]
+  ri_beta_band: 10.0   # reel-in: band below ri_beta_max over which the speed is reduced [deg]
+  k_azimuth: 1.5       # azimuth -> heading gain while parking [-]
+  # tether lengths of the pumping cycle
+  l_min: 200.0
+  l_max: 350.0
+  # winch
+  f_ro_factor: 0.333   # reel-out factor used to tune the sqrt law [-]
+  ro_mode: sqrt        # reel-out winch law: "sqrt" (v = k_v sqrt(F)) or "force" (constant force f_ro)
+  f_ro: 3000.0         # tether force set-point for ro_mode "force" [N]
+  f_max: 4000.0        # upper force limit [N] (V3 nominal)
+  f_min: 300.0         # lower force limit during reel-out [N]
+  f_ri: 1200.0         # upper force limit during reel-in [N]
+  v_ri: 7.0            # reel-in speed set-point [m/s]
+  kp_force: 0.002      # P gain of the force limiters [m/s/N]
+  ki_force: 0.004      # I gain of the force limiters [m/s/N/s]

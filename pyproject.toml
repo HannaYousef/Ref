@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "softkite"
+version = "0.1.1"
+description = "Simple, fast-to-install reference model of a soft-wing (LEI) kite power system: quasi-steady tether, rigid-wing point-mass kite with pitch trim, pumping-cycle control and 3-D replay."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = ["numpy>=1.22", "scipy>=1.8", "matplotlib>=3.5", "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+fast = ["numba>=0.57"]                       # ~2x faster simulations
+fit = ["pandas>=1.5"]                        # scripts/fit_v3kite_logs.py
+vsm = ["VSM @ git+https://github.com/awegroup/Vortex-Step-Method"]  # scripts/identify_aero_vsm.py
+test = ["pytest>=7"]
+
+[tool.setuptools]
+packages = ["softkite", "softkite.controllers"]
+
+[tool.setuptools.package-data]
+softkite = ["data/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
